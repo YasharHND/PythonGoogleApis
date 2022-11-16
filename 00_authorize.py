@@ -7,10 +7,7 @@ import google.oauth2.credentials
 import google_auth_oauthlib.flow
 import requests
 
-CLIENT_SECRETS_FILE = "client_secret.json"
-SCOPES = ["https://www.googleapis.com/auth/youtube.force-ssl"]
-API_SERVICE_NAME = "youtube"
-API_VERSION = "v3"
+from _constants import *
 
 app = flask.Flask(__name__)
 app.secret_key = secrets.token_hex()
@@ -38,14 +35,14 @@ def oauth2callback():
     flow.redirect_uri = flask.url_for("oauth2callback", _external=True)
     authorization_response = flask.request.url
     flow.fetch_token(authorization_response=authorization_response)
-    with open("user_credentials.json", "w") as file:
+    with open(USER_CREDENTIALS_FILE, "w") as file:
         json.dump(credentials_to_dict(flow.credentials), file, indent=2)
     return "Authorized...!"
 
 
 @app.route("/revoke")
 def revoke():
-    with open("user_credentials.json", "r") as file:
+    with open(USER_CREDENTIALS_FILE, "r") as file:
         credentials = google.oauth2.credentials.Credentials(**json.loads(file.read()))
     result = requests.post("https://oauth2.googleapis.com/revoke",
                            params={"token": credentials.token},
