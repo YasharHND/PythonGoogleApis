@@ -3,7 +3,11 @@ import os
 
 import google.oauth2.credentials
 
-from _constants import USER_CREDENTIALS_FILE
+USER_CREDENTIALS_FILE = "user_credentials.json"
+
+
+def has_user_credentials():
+    return os.path.isfile(USER_CREDENTIALS_FILE)
 
 
 def save_user_credentials(credentials):
