@@ -28,7 +28,10 @@ class ServerThread(threading.Thread):
 CLIENT_SECRETS_FILE = "client_secret.json"
 
 
-def authorize_user(scopes):
+def authorize_user(scopes, load_from_cache=False):
+    if load_from_cache and has_user_credentials():
+        return load_user_credentials()
+
     # Revoking previous user credentials
     if has_user_credentials():
         print("User has credentials; removing it first...")
@@ -41,6 +44,8 @@ def authorize_user(scopes):
             print("Warn :: Error while removing user credentials!")
         remove_user_credentials()
         print("User credentials removed!")
+
+    print("Authorizing user...")
 
     # Starting the server
     os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"

@@ -3,9 +3,6 @@ import googleapiclient.discovery
 from _authorize import authorize_user
 
 SCOPES = ["https://www.googleapis.com/auth/youtube.force-ssl"]
-
-print("Authorizing user...")
-
 credentials = authorize_user(SCOPES)
 youtube = googleapiclient.discovery.build("youtube", "v3", credentials=credentials)
 
