@@ -1,6 +1,6 @@
-def new_row(row_index, teams, match_id):
-    return {
-        "requests": [{
+def new_row(index, match_name, match_id):
+    return [
+        {
             "appendDimension": {
                 "dimension": "ROWS",
                 "length": 1
@@ -14,8 +14,8 @@ def new_row(row_index, teams, match_id):
                     "endColumnIndex": 10
                 },
                 "destination": {
-                    "startRowIndex": row_index,
-                    "endRowIndex": row_index + 1,
+                    "startRowIndex": index,
+                    "endRowIndex": index + 1,
                     "startColumnIndex": 9,
                     "endColumnIndex": 10
                 },
@@ -30,8 +30,8 @@ def new_row(row_index, teams, match_id):
                     "endColumnIndex": 11
                 },
                 "destination": {
-                    "startRowIndex": row_index,
-                    "endRowIndex": row_index + 1,
+                    "startRowIndex": index,
+                    "endRowIndex": index + 1,
                     "startColumnIndex": 10,
                     "endColumnIndex": 11
                 },
@@ -46,8 +46,8 @@ def new_row(row_index, teams, match_id):
                     "endColumnIndex": 12
                 },
                 "destination": {
-                    "startRowIndex": row_index,
-                    "endRowIndex": row_index + 1,
+                    "startRowIndex": index,
+                    "endRowIndex": index + 1,
                     "startColumnIndex": 11,
                     "endColumnIndex": 12
                 },
@@ -57,25 +57,12 @@ def new_row(row_index, teams, match_id):
             "updateCells": {
                 "rows": [{
                     "values": [{
-                        "userEnteredValue": {"stringValue": "XYZ"}
+                        "userEnteredValue": {"stringValue": match_name}
                     }]
                 }],
                 "fields": "userEnteredValue",
                 "start": {
-                    "rowIndex": row_index,
-                    "columnIndex": 0
-                }
-            }
-        }, {
-            "updateCells": {
-                "rows": [{
-                    "values": [{
-                        "userEnteredValue": {"stringValue": teams}
-                    }]
-                }],
-                "fields": "userEnteredValue",
-                "start": {
-                    "rowIndex": row_index,
+                    "rowIndex": index,
                     "columnIndex": 0
                 }
             }
@@ -88,7 +75,7 @@ def new_row(row_index, teams, match_id):
                 }],
                 "fields": "userEnteredValue",
                 "start": {
-                    "rowIndex": row_index,
+                    "rowIndex": index,
                     "columnIndex": 12
                 }
             }
@@ -101,17 +88,17 @@ def new_row(row_index, teams, match_id):
                 }],
                 "fields": "userEnteredValue",
                 "start": {
-                    "rowIndex": row_index,
+                    "rowIndex": index,
                     "columnIndex": 13
                 }
             }
-        }]
-    }
+        }
+    ]
 
 
-def finalize_row(row_index, home_score, away_score):
-    return {
-        "requests": [{
+def finalize_row(index, home_score, away_score):
+    return [
+        {
             "updateCells": {
                 "rows": [{
                     "values": [{
@@ -120,7 +107,7 @@ def finalize_row(row_index, home_score, away_score):
                 }],
                 "fields": "userEnteredValue",
                 "start": {
-                    "rowIndex": row_index,
+                    "rowIndex": index,
                     "columnIndex": 7
                 }
             }
@@ -133,7 +120,7 @@ def finalize_row(row_index, home_score, away_score):
                 }],
                 "fields": "userEnteredValue",
                 "start": {
-                    "rowIndex": row_index,
+                    "rowIndex": index,
                     "columnIndex": 8
                 }
             }
@@ -146,9 +133,9 @@ def finalize_row(row_index, home_score, away_score):
                 }],
                 "fields": "userEnteredValue",
                 "start": {
-                    "rowIndex": row_index,
+                    "rowIndex": index,
                     "columnIndex": 13
                 }
             }
-        }]
-    }
+        }
+    ]
