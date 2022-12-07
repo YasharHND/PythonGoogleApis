@@ -15,7 +15,7 @@ def matches():
             "name": name,
             "email": email,
             "password": password,
-            "passwordConfirm": os.getenv("WC_PASSWORD")
+            "passwordConfirm": password
         }).json().get("data").get("token")
 
     def login(email, password):
