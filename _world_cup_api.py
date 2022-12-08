@@ -57,4 +57,5 @@ def matches():
             "away_score": item.get("away_score")
         }
 
-    return sorted(map(readable_match, requests.get(f"{base_url}/match", headers={"Authorization": f"Bearer {token}"}).json().get("data")), key=lambda i: i.get("date"))
+    matches_sorted = sorted(map(readable_match, requests.get(f"{base_url}/match", headers={"Authorization": f"Bearer {token}"}).json().get("data")), key=lambda i: i.get("date"))
+    return list(filter(lambda i: i.get("home") != "--" and i.get("away") != "--", matches_sorted))
